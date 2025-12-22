@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Select Shop - AI Tool Boutique</title>
+<meta content="A curated boutique navigation for top-tier AI tools." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#002FA7", // Klein Blue
+              "background-light": "#F0F2F5",
+              "background-dark": "#0a0a0a",
+              "card-light": "#ffffff",
+              "card-dark": "#171717",
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              'xl': '1rem',
+              '2xl': '1.5rem',
+              '3xl': '2rem',
+            },
+            boxShadow: {
+                'soft': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                'float': '0 20px 60px -15px rgba(0, 47, 167, 0.25)',
+                'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            }
+          },
+        },
+      };
+    </script>
+<style>
+        body {background: radial-gradient(circle at 50% 10%, #4364F7 0%, #002FA7 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }.hover-card {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+        }.bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);grid-auto-rows: minmax(80px, auto); 
+            gap: 24px;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        @media (min-width: 1024px) {
+            .card-logo { grid-column: 1 / 4; grid-row: 1 / 5; }
+            .card-hero { grid-column: 4 / 9; grid-row: 1 / 4; }.card-list { grid-column: 9 / 13; grid-row: 1 / 6; }
+            .card-latest { grid-column: 2 / 5; grid-row: 5 / 8; }
+            .card-about { grid-column: 5 / 8; grid-row: 4 / 7; }
+            .card-visual { grid-column: 8 / 9; grid-row: 4 / 7; }
+            .card-contact { grid-column: 1 / 5; grid-row: 8 / 10; }
+            .card-pill-1 { grid-column: 5 / 7; grid-row: 7 / 8; }
+            .card-pill-2 { grid-column: 7 / 9; grid-row: 7 / 8; }.card-qa { grid-column: 9 / 13; grid-row: 6 / 10; }
+        }
+        @media (max-width: 1023px) {
+            .bento-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800 dark:text-gray-100 selection:bg-white selection:text-primary">
+<div class="bento-grid" id="grid-container">
+<div class="card-logo bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float hover-card flex flex-col items-center justify-center text-center relative overflow-hidden group cursor-grab active:cursor-grabbing" draggable="true">
+<div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+<div class="text-xs font-mono text-gray-400 dark:text-gray-500 absolute top-4 left-6">brand_identity.svg</div>
+<div class="relative z-10 py-8">
+<h1 class="font-display font-bold text-6xl tracking-tighter text-primary dark:text-white group-hover:rotate-6 transition-transform duration-500 leading-none">
+                    AI<br/>SELECT<br/><span class="text-black dark:text-gray-400">SHOP</span>
+</h1>
+</div>
+<div class="absolute bottom-6 bg-white dark:bg-neutral-800 shadow-sm px-6 py-2 rounded-full border border-gray-100 dark:border-neutral-700">
+<span class="font-medium text-sm">Est. 2024</span>
+</div>
+</div>
+<div class="card-hero bg-card-light dark:bg-card-dark rounded-3xl p-8 shadow-float hover-card flex flex-col justify-between relative cursor-grab active:cursor-grabbing" draggable="true">
+<div>
+<h2 class="font-display text-4xl font-bold leading-tight mb-6 text-gray-900 dark:text-white">
+<span class="text-primary text-3xl">Curating the best AI tools</span>
+</h2>
+<p class="text-lg text-gray-500 dark:text-gray-400 leading-relaxed font-light">
+                    Stop searching through thousands of mediocre apps. Our boutique features only the high-impact, design-forward AI solutions that actually transform your workflow.
+                </p>
+</div>
+<div class="flex justify-end mt-6">
+<button class="bg-black dark:bg-white text-white dark:text-black rounded-full p-3 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-xl">arrow_outward</span>
+</button>
+</div>
+</div>
+<div class="card-list bg-gradient-to-br from-gray-50 to-gray-100 dark:from-neutral-900 dark:to-neutral-800 rounded-3xl p-0 shadow-float hover-card overflow-hidden flex flex-col border border-white/20 cursor-grab active:cursor-grabbing" draggable="true">
+<div class="px-6 pt-6 pb-2 border-b border-gray-200 dark:border-neutral-700 bg-card-light/50 dark:bg-card-dark/50 backdrop-blur-sm z-10 flex justify-between items-center sticky top-0">
+<span class="font-display font-bold text-lg text-primary">Directions</span>
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold">5 Categories</span>
+</div>
+<div class="overflow-y-auto no-scrollbar flex-1 p-6 space-y-3">
+<div class="group relative bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-transparent hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary">AI Chatbot</span>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-transform group-hover:translate-x-1">chevron_right</span>
+</div>
+<div class="hidden group-hover:block absolute left-0 top-full mt-2 w-full bg-white dark:bg-neutral-800 rounded-xl shadow-xl border border-gray-100 dark:border-neutral-700 p-3 z-50 animate-fade-in-down">
+<div class="text-xs text-gray-500 mb-2 font-mono">LATEST TOOLS</div>
+<div class="flex items-center gap-2 p-2 hover:bg-gray-50 dark:hover:bg-neutral-700 rounded-lg">
+<div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">C3</div>
+<div>
+<div class="font-bold text-sm">Claude 3.5</div>
+<div class="text-[10px] text-gray-500">Coding partner</div>
+</div>
+</div>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-transparent hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary">AI Coding</span>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-transform group-hover:translate-x-1">chevron_right</span>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-transparent hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary">AI Image Gen</span>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-transform group-hover:translate-x-1">chevron_right</span>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-transparent hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary">AI Video</span>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-transform group-hover:translate-x-1">chevron_right</span>
+</div>
+</div>
+<div class="group relative bg-white dark:bg-neutral-800 rounded-xl p-4 shadow-sm border border-transparent hover:border-primary transition-all cursor-pointer">
+<div class="flex items-center justify-between">
+<span class="font-bold text-gray-800 dark:text-gray-200 group-hover:text-primary">AI Audio</span>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-transform group-hover:translate-x-1">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white dark:bg-neutral-900 border-t border-gray-100 dark:border-neutral-700 flex justify-center">
+<button class="bg-primary text-white rounded-full px-4 py-2 shadow-lg hover:bg-blue-700 transition flex items-center gap-2 text-sm font-medium">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+          All Categories
+        </button>
+</div>
+</div>
+<div class="card-latest bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float hover-card relative overflow-hidden group cursor-grab active:cursor-grabbing" draggable="true">
+<div class="flex justify-between items-center mb-4">
+<span class="font-bold font-display text-xl">New Arrival</span>
+<span class="text-xs font-mono text-gray-400 bg-gray-100 dark:bg-neutral-800 px-2 py-1 rounded">2m ago</span>
+</div>
+<h3 class="font-bold text-lg mb-2">DeepSeek V2</h3>
+<p class="text-sm text-gray-600 dark:text-gray-300 mb-6">
+                Open source champion. Deploy smart models with ease and cost efficiency.
+            </p>
+<div class="font-mono text-[10px] leading-[10px] text-gray-400 whitespace-pre overflow-hidden select-none opacity-50 group-hover:opacity-80 transition-opacity">
+:::    ::: :::::::::: :::::::::: 
+:+:    :+: :+:        :+:        
++:+    +:+ +:+        +:+        
++#++:++#++ +#++:++#   +#++:++#   
++#+    +#+ +#+        +#+        
+#+#    #+# #+#        #+#        
+###    ### ########## ########## 
+            </div>
+<button class="absolute bottom-4 right-4 bg-gray-100 dark:bg-neutral-800 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors group-hover:scale-110">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="card-about bg-[#FFDEE9] bg-gradient-to-br from-[#FFDEE9] to-[#B5FFFC] dark:from-purple-900 dark:to-blue-900 rounded-3xl overflow-hidden shadow-float hover-card relative cursor-grab active:cursor-grabbing" draggable="true">
+<img alt="Abstract 3D fluid shape representing AI neural network" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWjR8MOrb5D0gs6xrQp5xs9DAso3q0sx0L_MAZlc7PQCjNtaiadadOO4bhX9jt5J21JuF6lsSqIDqzuG_W0k5ZAxVySYGzPuDESfSiJVjK6gyOBr4CS1gf8WVxOZat_o_zKj1nL3jTnxqMosyTCFCjQqwM_zi3lbP0qeRrV7CCUEFUr8bIB3-fNS-HaTyecWyLBZUYB22h7mVi9NY1dUWuU2G0OqxfDJKbxHL7luLib-w7XmwNofw0vNxsvaxgUP5ay7L9P95GnAm3"/>
+<div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/60 to-transparent">
+<h3 class="text-white font-bold text-xl">Latest Case</h3>
+<p class="text-white/80 text-sm mt-1">Generative Video &amp; 3D Workflow</p>
+</div>
+<div class="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<button class="bg-white text-black px-4 py-2 rounded-full font-bold text-sm transform translate-y-4 hover:translate-y-0 transition-transform duration-300">View Case</button>
+</div>
+</div>
+<div class="card-visual bg-card-light dark:bg-card-dark rounded-3xl p-4 shadow-float hover-card flex flex-col items-center justify-center space-y-4 cursor-grab active:cursor-grabbing" draggable="true">
+<div class="flex flex-col gap-4 w-full">
+<a class="h-14 bg-pink-500 rounded-2xl flex items-center justify-center text-white shadow-lg hover:scale-105 transition-transform w-full" href="#">
+<span class="font-bold text-xl">Ig</span>
+</a>
+<a class="h-14 bg-blue-400 rounded-2xl flex items-center justify-center text-white shadow-lg hover:scale-105 transition-transform w-full" href="#">
+<span class="font-bold text-xl">X</span>
+</a>
+</div>
+</div>
+<div class="card-qa bg-card-light dark:bg-card-dark rounded-3xl overflow-hidden shadow-float hover-card relative min-h-[240px] flex flex-col cursor-grab active:cursor-grabbing" draggable="true">
+<div class="flex-1 p-6 flex flex-col justify-end relative bg-gray-50 dark:bg-neutral-800">
+<div class="space-y-3 mb-4">
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<div class="bg-white dark:bg-neutral-900 p-3 rounded-2xl rounded-tl-none text-sm text-gray-700 dark:text-gray-200 shadow-sm max-w-[80%]">
+                    Hello! I'm your AI shopping assistant. What tool are you looking for today?
+                </div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white dark:bg-neutral-900 border-t border-gray-100 dark:border-neutral-700">
+<div class="relative">
+<input class="w-full bg-gray-100 dark:bg-neutral-800 border-none rounded-full py-3 px-4 pr-12 text-sm focus:ring-2 focus:ring-primary dark:text-white" placeholder="Ask anything..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="card-contact bg-primary text-white rounded-3xl p-8 shadow-float hover-card flex flex-col justify-between group cursor-grab active:cursor-grabbing" draggable="true">
+<div>
+<h3 class="font-display font-bold text-2xl mb-2">Submit a Tool</h3>
+<p class="text-blue-100 text-sm">Building the future?</p>
+</div>
+<div class="mt-4 flex items-center gap-2 font-mono text-sm opacity-80 group-hover:opacity-100">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+<span>Submit Now</span>
+</div>
+</div>
+<div class="card-pill-1 bg-white dark:bg-card-dark rounded-full p-4 shadow-float hover-card flex flex-col items-center justify-center cursor-pointer border border-transparent hover:border-gray-200 dark:hover:border-neutral-700 transition-all text-center cursor-grab active:cursor-grabbing" draggable="true">
+<span class="font-display font-bold text-sm block">Explore Categories</span>
+</div>
+<div class="card-pill-2 bg-white dark:bg-card-dark rounded-full p-4 shadow-float hover-card flex flex-col items-center justify-center cursor-pointer border border-transparent hover:border-gray-200 dark:hover:border-neutral-700 transition-all text-center cursor-grab active:cursor-grabbing" draggable="true">
+<span class="font-display font-bold text-sm block">Explore Case</span>
+</div>
+</div>
+<section class="max-w-6xl mx-auto px-6 pb-16">
+<h2 class="font-display text-3xl text-white mb-6">State Preview</h2>
+<div class="grid gap-6 lg:grid-cols-2">
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-display text-xl font-bold">Tool Detail Modal</h3>
+<span class="text-xs font-mono text-gray-400">Loading / Empty</span>
+</div>
+<div class="space-y-4">
+<div class="rounded-2xl border border-gray-100 dark:border-neutral-700 p-4 animate-pulse">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-gray-200 dark:bg-neutral-700"></div>
+<div class="h-4 w-40 bg-gray-200 dark:bg-neutral-700 rounded"></div>
+</div>
+<div class="h-3 w-5/6 bg-gray-200 dark:bg-neutral-700 rounded mb-2"></div>
+<div class="h-3 w-4/6 bg-gray-200 dark:bg-neutral-700 rounded"></div>
+<div class="flex gap-2 mt-4">
+<div class="h-8 w-28 bg-gray-200 dark:bg-neutral-700 rounded-full"></div>
+<div class="h-8 w-20 bg-gray-200 dark:bg-neutral-700 rounded-full"></div>
+</div>
+</div>
+<div class="rounded-2xl border border-gray-100 dark:border-neutral-700 p-6 text-center">
+<div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-gray-400">search_off</span>
+</div>
+<div class="font-display font-bold text-lg">Tool not found</div>
+<div class="text-sm text-gray-500 mt-1">Try a different tool or return to the list.</div>
+<div class="mt-4 flex items-center justify-center gap-2">
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm">Back to List</button>
+<button class="border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm">Submit a Tool</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-display text-xl font-bold">Case Detail Page</h3>
+<span class="text-xs font-mono text-gray-400">Loading / Empty</span>
+</div>
+<div class="space-y-4">
+<div class="rounded-2xl border border-gray-100 dark:border-neutral-700 p-4 animate-pulse">
+<div class="w-full aspect-video bg-gray-200 dark:bg-neutral-700 rounded-2xl mb-4"></div>
+<div class="h-4 w-2/3 bg-gray-200 dark:bg-neutral-700 rounded mb-2"></div>
+<div class="h-3 w-5/6 bg-gray-200 dark:bg-neutral-700 rounded"></div>
+<div class="grid grid-cols-3 gap-2 mt-4">
+<div class="h-8 bg-gray-200 dark:bg-neutral-700 rounded-full"></div>
+<div class="h-8 bg-gray-200 dark:bg-neutral-700 rounded-full"></div>
+<div class="h-8 bg-gray-200 dark:bg-neutral-700 rounded-full"></div>
+</div>
+</div>
+<div class="rounded-2xl border border-gray-100 dark:border-neutral-700 p-6 text-center">
+<div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-gray-400">report</span>
+</div>
+<div class="font-display font-bold text-lg">Case not found</div>
+<div class="text-sm text-gray-500 mt-1">Browse similar cases or return home.</div>
+<div class="mt-4 flex items-center justify-center gap-2">
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm">Back to Home</button>
+<button class="border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm">Explore Cases</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-6xl mx-auto px-6 pb-16">
+<h2 class="font-display text-3xl text-white mb-6">Modal Preview</h2>
+<div class="grid gap-6 lg:grid-cols-2">
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float border border-white/20">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">DS</div>
+<div>
+<div class="font-display text-2xl font-bold">DeepSeek V2</div>
+<div class="text-xs font-mono text-gray-400">tool_detail.modal</div>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="grid gap-4 lg:grid-cols-[3fr_2fr]">
+<div class="space-y-3">
+<p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">Open source champion. Deploy smart models with ease and cost efficiency. Perfect for enterprise workflows and lightweight inference.</p>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">AI Coding</span>
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">Open Source</span>
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">LLM</span>
+</div>
+<div class="space-y-2 text-sm text-gray-500">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">link</span> https://deepseek.com</div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">paid</span> Free / Paid</div>
+</div>
+</div>
+<div class="rounded-2xl border border-gray-100 dark:border-neutral-700 p-4 space-y-3">
+<div class="text-xs font-mono text-gray-400">RELATED CASES</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar">
+<div class="min-w-[140px] rounded-xl bg-gray-50 dark:bg-neutral-800 p-3 hover-card">
+<div class="text-sm font-bold">Gen Video</div>
+<div class="text-xs text-gray-500">Workflow</div>
+</div>
+<div class="min-w-[140px] rounded-xl bg-gray-50 dark:bg-neutral-800 p-3 hover-card">
+<div class="text-sm font-bold">3D Studio</div>
+<div class="text-xs text-gray-500">Render</div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">arrow_outward</span> Visit Website
+</button>
+<button class="border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm">Save</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float border border-white/20">
+<div class="flex items-start justify-between mb-4">
+<div>
+<div class="font-display text-2xl font-bold">AI Coding</div>
+<div class="text-sm text-gray-500">3 recommended tools</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="space-y-3">
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-transparent hover:border-primary transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">CL</div>
+<div>
+<div class="font-bold text-sm">Claude 3.5</div>
+<div class="text-xs text-gray-500">Coding partner</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-transparent hover:border-primary transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">CV</div>
+<div>
+<div class="font-bold text-sm">Cursor</div>
+<div class="text-xs text-gray-500">AI pair editor</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-4 border border-transparent hover:border-primary transition-all flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">DW</div>
+<div>
+<div class="font-bold text-sm">Devin</div>
+<div class="text-xs text-gray-500">Autonomous dev</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400">chevron_right</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<span class="text-xs font-mono text-gray-400">TOTAL 24 TOOLS</span>
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm">View All</button>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float border border-white/20 lg:col-span-2">
+<div class="flex items-start justify-between mb-4">
+<div>
+<div class="font-display text-2xl font-bold">Latest Case</div>
+<div class="text-sm text-gray-500">Generative Video & 3D Workflow</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-gray-100 dark:bg-neutral-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="grid gap-4 lg:grid-cols-[3fr_2fr]">
+<div class="rounded-2xl overflow-hidden relative">
+<div class="w-full aspect-video bg-gradient-to-br from-[#FFDEE9] to-[#B5FFFC]"></div>
+<div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/60 to-transparent text-white">
+<div class="font-bold text-lg">Case Overview</div>
+<div class="text-xs text-white/80">AI Video, 3D, Motion</div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">A boutique studio built a fully generative pipeline for 30-second product films with AI-driven assets and automation.</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="rounded-xl bg-gray-50 dark:bg-neutral-800 p-3 text-center">
+<div class="text-lg font-bold">3x</div>
+<div class="text-[10px] text-gray-500">Speed</div>
+</div>
+<div class="rounded-xl bg-gray-50 dark:bg-neutral-800 p-3 text-center">
+<div class="text-lg font-bold">-40%</div>
+<div class="text-[10px] text-gray-500">Cost</div>
+</div>
+<div class="rounded-xl bg-gray-50 dark:bg-neutral-800 p-3 text-center">
+<div class="text-lg font-bold">98%</div>
+<div class="text-[10px] text-gray-500">Match</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">Runway</span>
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">ComfyUI</span>
+<span class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary">Blender</span>
+</div>
+<div class="flex gap-2">
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm">View Details</button>
+<button class="border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">share</span> Share
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-6xl mx-auto px-6 pb-16">
+<h2 class="font-display text-3xl text-white mb-6">Category Detail Page</h2>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-display text-3xl font-bold">AI Coding</div>
+<div class="text-sm text-gray-500">Tools that supercharge development workflows.</div>
+</div>
+<div class="text-right text-xs font-mono text-gray-400">
+<div>24 TOOLS</div>
+<div>UPDATED 2D AGO</div>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 sticky top-4">
+<button class="bg-primary text-white rounded-full px-4 py-2 text-sm">All</button>
+<button class="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm">Free</button>
+<button class="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm">Paid</button>
+<div class="ml-auto">
+<button class="bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-full px-4 py-2 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">swap_vert</span> Sort
+</button>
+</div>
+</div>
+<div class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 shadow-card hover-card">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">CL</div>
+<div>
+<div class="font-bold">Claude 3.5</div>
+<div class="text-xs text-gray-500">AI coding assistant</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-gray-500">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary">Free</span>
+<span>Updated 2d</span>
+</div>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 shadow-card hover-card">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">CV</div>
+<div>
+<div class="font-bold">Cursor</div>
+<div class="text-xs text-gray-500">Editor with AI</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-gray-500">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary">Paid</span>
+<span>Updated 1d</span>
+</div>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 shadow-card hover-card">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">DW</div>
+<div>
+<div class="font-bold">Devin</div>
+<div class="text-xs text-gray-500">Autonomous dev</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-gray-500">
+<span class="px-2 py-1 rounded-full bg-primary/10 text-primary">Paid</span>
+<span>Updated 6h</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-6xl mx-auto px-6 pb-16">
+<h2 class="font-display text-3xl text-white mb-6">Case Detail Page</h2>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float">
+<div class="relative rounded-2xl overflow-hidden mb-6">
+<div class="w-full aspect-video bg-gradient-to-br from-[#FFDEE9] to-[#B5FFFC]"></div>
+<div class="absolute top-4 right-4 flex gap-2">
+<button class="bg-white/80 rounded-full p-2"><span class="material-symbols-outlined text-sm">arrow_back</span></button>
+<button class="bg-white/80 rounded-full p-2"><span class="material-symbols-outlined text-sm">share</span></button>
+</div>
+<div class="absolute bottom-4 left-4 text-white">
+<div class="font-display text-3xl font-bold">Generative Video & 3D Workflow</div>
+<div class="flex items-center gap-2 mt-2 text-xs font-mono">
+<span class="bg-white/20 px-3 py-1 rounded-full">Video</span>
+<span>2024-06-18</span>
+</div>
+</div>
+</div>
+<div class="grid gap-6 lg:grid-cols-[3fr_2fr]">
+<div class="space-y-4">
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-5 shadow-card">
+<div class="font-display font-bold text-lg mb-2">Background</div>
+<p class="text-sm text-gray-600 dark:text-gray-300">A boutique studio needed a faster pipeline to ship cinematic product teasers with minimal resources.</p>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-5 shadow-card">
+<div class="font-display font-bold text-lg mb-2">Workflow</div>
+<p class="text-sm text-gray-600 dark:text-gray-300">AI storyboard generation, asset creation, and automated compositing for rapid iteration.</p>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-5 shadow-card">
+<div class="font-display font-bold text-lg mb-2">Results</div>
+<p class="text-sm text-gray-600 dark:text-gray-300">Reduced production time by 40% while maintaining studio-grade quality.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-5 shadow-card">
+<div class="font-display font-bold text-lg mb-3">Tools Used</div>
+<div class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+<div class="flex items-center justify-between">
+<span>Runway</span><span class="text-xs text-primary">Paid</span>
+</div>
+<div class="flex items-center justify-between">
+<span>ComfyUI</span><span class="text-xs text-primary">Free</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Blender</span><span class="text-xs text-primary">Free</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-2xl p-5 shadow-card">
+<div class="font-display font-bold text-lg mb-3">Key Metrics</div>
+<div class="grid grid-cols-2 gap-3 text-center">
+<div class="rounded-xl bg-gray-50 dark:bg-neutral-700 p-3">
+<div class="text-lg font-bold">3x</div>
+<div class="text-[10px] text-gray-500">Speed</div>
+</div>
+<div class="rounded-xl bg-gray-50 dark:bg-neutral-700 p-3">
+<div class="text-lg font-bold">-40%</div>
+<div class="text-[10px] text-gray-500">Cost</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-6xl mx-auto px-6 pb-20">
+<h2 class="font-display text-3xl text-white mb-6">Admin Login / List</h2>
+<div class="grid gap-6 lg:grid-cols-2">
+<div class="bg-card-light dark:bg-card-dark rounded-3xl overflow-hidden shadow-float">
+<div class="grid md:grid-cols-2">
+<div class="bg-primary text-white p-6 flex flex-col justify-between">
+<div class="text-sm font-mono">admin_login</div>
+<div>
+<div class="font-display text-2xl font-bold">AI Select Shop</div>
+<div class="text-sm text-blue-100 mt-2">Boutique control room.</div>
+</div>
+<div class="text-xs text-blue-100">Klein Blue Admin</div>
+</div>
+<div class="p-6 space-y-4">
+<div class="font-display text-xl font-bold">Sign in</div>
+<input class="w-full rounded-full bg-gray-100 dark:bg-neutral-800 border-none px-4 py-2 text-sm" placeholder="Email" type="email"/>
+<input class="w-full rounded-full bg-gray-100 dark:bg-neutral-800 border-none px-4 py-2 text-sm" placeholder="Password" type="password"/>
+<button class="w-full bg-primary text-white rounded-full py-2 text-sm">Login</button>
+<div class="text-xs text-gray-500">Forgot password?</div>
+</div>
+</div>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-3xl p-6 shadow-float">
+<div class="flex items-center justify-between mb-4">
+<div class="font-display text-xl font-bold">Tools</div>
+<button class="bg-primary text-white rounded-full px-3 py-2 text-sm">New Tool</button>
+</div>
+<div class="flex items-center gap-2 mb-4">
+<input class="flex-1 rounded-full bg-gray-100 dark:bg-neutral-800 border-none px-4 py-2 text-sm" placeholder="Search tools..." type="text"/>
+<button class="border border-gray-200 dark:border-neutral-700 rounded-full px-3 py-2 text-sm">Filter</button>
+</div>
+<div class="space-y-2">
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-3 flex items-center justify-between">
+<div>
+<div class="font-bold text-sm">Claude 3.5</div>
+<div class="text-xs text-gray-500">AI Coding • Updated 2d</div>
+</div>
+<span class="text-xs px-2 py-1 rounded-full bg-green-100 text-green-600">Active</span>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-3 flex items-center justify-between">
+<div>
+<div class="font-bold text-sm">Cursor</div>
+<div class="text-xs text-gray-500">AI Coding • Updated 1d</div>
+</div>
+<span class="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-600">Draft</span>
+</div>
+<div class="bg-white dark:bg-neutral-800 rounded-xl p-3 flex items-center justify-between">
+<div>
+<div class="font-bold text-sm">Devin</div>
+<div class="text-xs text-gray-500">AI Coding • Updated 6h</div>
+</div>
+<span class="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600">Hidden</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script>
+        // Enhanced drag and drop logic to support the user request "support user free drag position"
+        const draggables = document.querySelectorAll('.bento-grid > div');
+        const container = document.querySelector('.bento-grid');
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('opacity-50');
+                draggable.setAttribute('data-dragging', 'true');
+            });
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('opacity-50');
+                draggable.removeAttribute('data-dragging');
+            });
+        });
+        container.addEventListener('dragover', e => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(container, e.clientX, e.clientY);
+            const draggable = document.querySelector('[data-dragging="true"]');
+            if (afterElement == null) {
+                container.appendChild(draggable);
+            } else {
+                container.insertBefore(draggable, afterElement);
+            }
+        });
+        function getDragAfterElement(container, x, y) {
+            const draggableElements = [...container.querySelectorAll('.bento-grid > div:not([data-dragging="true"])')];
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                // Simple distance calculation to find closest insertion point based on mouse position relative to card centers
+                const offsetX = x - (box.left + box.width / 2);
+                const offsetY = y - (box.top + box.height / 2);
+                // We use Euclidean distance approximate logic for grid item swapping visually
+                const dist = Math.sqrt(offsetX * offsetX + offsetY * offsetY);
+                if (closest === null || dist < closest.dist) {
+                    return { offset: dist, element: child, dist: dist };
+                } else {
+                    return closest;
+                }
+            }, null).element;
+        }
+        // Keep simple hover interactions
+        const cards = document.querySelectorAll('.hover-card');
+        cards.forEach(card => {
+             card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body></html>
