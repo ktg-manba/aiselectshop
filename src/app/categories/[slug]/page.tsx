@@ -52,6 +52,14 @@ const toolList: ToolItem[] = [
   },
 ];
 
+const categoryTabs = [
+  "AI Chatbot",
+  "AI Coding",
+  "AI Image Gen",
+  "AI Video",
+  "AI Audio",
+];
+
 const filters = ["all", "free", "paid", "freemium"] as const;
 const sorts = ["popularity", "updated"] as const;
 
@@ -61,6 +69,7 @@ type Sort = (typeof sorts)[number];
 export default function CategoryDetailPage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [sort, setSort] = useState<Sort>("popularity");
+  const [activeCategory, setActiveCategory] = useState("AI Coding");
 
   const visibleTools = useMemo(() => {
     const filtered = toolList.filter((tool) =>
@@ -91,6 +100,22 @@ export default function CategoryDetailPage() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
+          {categoryTabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveCategory(tab)}
+              className={`rounded-full px-4 py-2 text-sm transition ${
+                activeCategory === tab
+                  ? "bg-[#002FA7] text-white"
+                  : "bg-white/90 text-gray-700 border border-gray-200"
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-center gap-2">
           {filters.map((item) => (
             <button
               key={item}

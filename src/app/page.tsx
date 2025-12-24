@@ -106,23 +106,19 @@ export default function Home() {
   return (
     <div className="min-h-screen text-gray-800 dark:text-gray-100">
       <div className="bento-grid" id="grid-container">
-        <div className="card-logo bg-white/90 dark:bg-[#171717]/90 rounded-[32px] p-6 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center text-center relative overflow-hidden group cursor-grab active:cursor-grabbing">
-          <div className="absolute top-0 left-0 w-full h-2 bg-[#002FA7]"></div>
-          <div className="text-xs font-mono text-gray-400 absolute top-4 left-6">
-            brand_identity.svg
-          </div>
+        <div className="card-logo bg-white rounded-[32px] p-6 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center text-center relative overflow-hidden group cursor-grab active:cursor-grabbing text-black">
           <div className="relative z-10 py-8">
             <h1 className="font-display font-bold text-6xl tracking-tighter text-[#002FA7] group-hover:rotate-6 transition-transform duration-500 leading-none">
               AI<br />SELECT<br />
-              <span className="text-black/80">SHOP</span>
+              <span className="text-black">SHOP</span>
             </h1>
           </div>
           <div className="absolute bottom-6 bg-white shadow-sm px-6 py-2 rounded-full border border-gray-100">
-            <span className="font-medium text-sm">Est. 2024</span>
+            <span className="font-medium text-sm">Est. 2025</span>
           </div>
         </div>
 
-        <div className="card-hero bg-white/90 dark:bg-[#171717]/90 rounded-[32px] p-8 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col justify-between relative cursor-grab active:cursor-grabbing">
+        <div className="card-hero bg-white rounded-[32px] p-8 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col justify-between relative cursor-grab active:cursor-grabbing text-black">
           <div>
             <h2 className="font-display text-4xl font-bold leading-tight mb-6 text-gray-900">
               <span className="text-[#002FA7] text-3xl">Curating the best AI tools</span>
@@ -178,7 +174,7 @@ export default function Home() {
 
         <button
           onClick={() => setToolModal(tools[0])}
-          className="card-latest bg-white/90 rounded-[32px] p-6 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card relative overflow-hidden group cursor-grab active:cursor-grabbing text-left"
+          className="card-latest bg-white rounded-[32px] p-6 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card relative overflow-hidden group cursor-grab active:cursor-grabbing text-left text-black"
         >
           <div className="flex justify-between items-center mb-4">
             <span className="font-bold font-display text-xl">New Arrival</span>
@@ -280,13 +276,13 @@ export default function Home() {
 
         <Link
           href="/categories/ai-coding"
-          className="card-pill-1 bg-white rounded-full p-4 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center border border-transparent hover:border-gray-200 transition-all text-center cursor-grab active:cursor-grabbing"
+          className="card-pill-1 bg-white rounded-full p-4 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center border border-transparent hover:border-gray-200 transition-all text-center cursor-grab active:cursor-grabbing text-black"
         >
           <span className="font-display font-bold text-sm block">Explore Categories</span>
         </Link>
         <Link
-          href="/cases/gen-video"
-          className="card-pill-2 bg-white rounded-full p-4 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center border border-transparent hover:border-gray-200 transition-all text-center cursor-grab active:cursor-grabbing"
+          href="/cases"
+          className="card-pill-2 bg-white rounded-full p-4 shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card flex flex-col items-center justify-center border border-transparent hover:border-gray-200 transition-all text-center cursor-grab active:cursor-grabbing text-black"
         >
           <span className="font-display font-bold text-sm block">Explore Case</span>
         </Link>
@@ -304,7 +300,10 @@ export default function Home() {
           category={categoryModal}
           tools={categoryTools}
           onClose={() => setCategoryModal(null)}
-          onOpenTool={(tool) => setToolModal(tool)}
+          onOpenTool={(tool) => {
+            setCategoryModal(null);
+            setToolModal(tool);
+          }}
         />
       )}
       {caseModal && (
@@ -343,7 +342,7 @@ function ToolDetailModal({
       <div
         role="dialog"
         aria-modal="true"
-        className="relative z-50 w-full max-w-3xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20"
+        className="relative z-50 w-full max-w-3xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20 text-black"
       >
         <div className="sticky top-0 flex items-center justify-between p-6 border-b border-gray-100 bg-white/80 backdrop-blur-sm rounded-t-[32px]">
           <div className="flex items-center gap-3">
@@ -440,7 +439,7 @@ function CategoryToolsModal({
       <div
         role="dialog"
         aria-modal="true"
-        className="relative z-50 w-full max-w-2xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20"
+        className="relative z-50 w-full max-w-2xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20 text-black"
       >
         <div className="flex items-start justify-between p-6 border-b border-gray-100">
           <div>
@@ -503,7 +502,7 @@ function CaseDetailModal({
       <div
         role="dialog"
         aria-modal="true"
-        className="relative z-50 w-full max-w-4xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20"
+        className="relative z-50 w-full max-w-4xl bg-white rounded-[32px] shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] border border-white/20 text-black"
       >
         <div className="flex items-start justify-between p-6 border-b border-gray-100">
           <div>
