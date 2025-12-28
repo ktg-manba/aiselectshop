@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import BottomBar from "@/components/BottomBar";
 import { useLanguage } from "@/components/LanguageProvider";
 
+export const dynamic = "force-dynamic";
+
 type LocalizedText = {
   en: string;
   zh: string;
