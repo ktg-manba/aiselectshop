@@ -1,3 +1,13 @@
+AI Select Shop — a fashion-forward AI tools and cases directory with a bold, draggable UI and built-in assistant.
+
+## Highlights
+
+- Fashion-first visual system with bold typography and editorial layouts
+- Modular, draggable homepage cards for playful exploration
+- AI Q&A assistant (OpenRouter + Gemini 2.5 Flash) with tool-aware links
+- Curated tools + case studies with bilingual content (EN/ZH)
+- Admin console for tools, cases, and categories management
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
