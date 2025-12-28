@@ -8,8 +8,15 @@ type AuthSession = {
   expires_in?: number;
 };
 
-function unauthorized() {
-  return { ok: false, response: NextResponse.json({ error: "Unauthorized" }, { status: 401 }) };
+type RequireAdminResult =
+  | { ok: true; admin: { id: string; email: string; name: string | null; is_admin: boolean }; session?: AuthSession }
+  | { ok: false; response: NextResponse };
+
+function unauthorized(): RequireAdminResult {
+  return {
+    ok: false,
+    response: NextResponse.json({ error: "Unauthorized" }, { status: 401 }),
+  };
 }
 
 export function applyAuthCookies(response: NextResponse, session?: AuthSession) {
@@ -53,7 +60,7 @@ async function refreshAdminSession(refreshToken: string | null) {
   return { user, session: refreshed.session };
 }
 
-export async function requireAdmin(request: Request) {
+export async function requireAdmin(request: Request): Promise<RequireAdminResult> {
   const token = getTokenFromRequest(request);
   const refreshToken = getRefreshTokenFromRequest(request);
   if (!token) {
