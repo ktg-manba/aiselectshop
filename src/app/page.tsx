@@ -738,7 +738,7 @@ export default function Home() {
             if (suppressClickRef.current) return;
             if (primaryCase) setCaseModal(primaryCase);
           }}
-          className="card-about bg-gradient-to-br from-[#FFDEE9] to-[#B5FFFC] rounded-[32px] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card relative cursor-grab active:cursor-grabbing text-left"
+          className="card-about min-h-[220px] bg-gradient-to-br from-[#FFDEE9] to-[#B5FFFC] rounded-[32px] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,47,167,0.25)] hover-card relative cursor-grab active:cursor-grabbing text-left"
         >
           <div
             className="absolute inset-0 bg-cover bg-center opacity-85 mix-blend-overlay"
