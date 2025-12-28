@@ -74,6 +74,7 @@ export default function Home() {
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [layout, setLayout] = useState<Record<string, LayoutItem>>({});
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [dragEnabled, setDragEnabled] = useState(true);
   const pageRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const layoutRef = useRef<Record<string, LayoutItem>>({});
@@ -238,6 +239,26 @@ export default function Home() {
       return [{ ...first, content: greeting }, ...prev.slice(1)];
     });
   }, [assistantMessages.length, t]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const media = window.matchMedia("(min-width: 1024px)");
+    const update = () => setDragEnabled(media.matches);
+    update();
+    if (media.addEventListener) {
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (dragEnabled) return;
+    dragRef.current = null;
+    setDraggingId(null);
+    document.body.style.userSelect = "";
+  }, [dragEnabled]);
 
   useEffect(() => {
     typedMessagesRef.current = typedMessages;
@@ -449,6 +470,7 @@ export default function Home() {
 
   function handlePointerDown(id: string) {
     return (event: React.PointerEvent<HTMLElement>) => {
+      if (!dragEnabled) return;
       const target = event.target as HTMLElement;
       if (target.closest("[data-no-drag], input, textarea")) return;
       if (!containerRef.current) return;
