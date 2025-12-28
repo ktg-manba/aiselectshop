@@ -26,7 +26,11 @@ export async function GET() {
     description: { en: category.description_en, zh: category.description_zh },
     icon: category.icon,
     order_index: category.order_index,
-    subTags: [],
+    subTags: [] as Array<{
+      id: string;
+      name: { en: string; zh: string };
+      order_index?: number | null;
+    }>,
   }));
   const map = new Map(categories.map((item) => [item.id, item]));
   (subtagsData || []).forEach((subtag: any) => {
