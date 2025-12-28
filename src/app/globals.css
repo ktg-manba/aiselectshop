@@ -10,9 +10,12 @@
   --text-light: #f3f4f6;
 }
 
+html {
+  background-color: #002fa7;
+}
+
 body {
-  background: radial-gradient(circle at 50% 10%, #4364f7 0%, #002fa7 100%);
-  background-attachment: fixed;
+  background-color: transparent;
   color: var(--text-dark);
   font-family: var(--font-sans), sans-serif;
   min-height: 100vh;
@@ -42,6 +45,113 @@ body {
   z-index: 10;
 }
 
+.page-reveal {
+  animation: page-fade 0.6s ease-out both;
+}
+
+.reveal-item {
+  animation: card-rise 0.7s ease-out both;
+}
+
+.page-reveal .bento-grid > * {
+  animation: card-fly-up 0.7s ease-out both;
+  animation-delay: calc(var(--stagger, 0) * 60ms);
+}
+
+.page-reveal .bento-grid > *:nth-child(1) { --stagger: 0; }
+.page-reveal .bento-grid > *:nth-child(2) { --stagger: 1; }
+.page-reveal .bento-grid > *:nth-child(3) { --stagger: 2; }
+.page-reveal .bento-grid > *:nth-child(4) { --stagger: 3; }
+.page-reveal .bento-grid > *:nth-child(5) { --stagger: 4; }
+.page-reveal .bento-grid > *:nth-child(6) { --stagger: 5; }
+.page-reveal .bento-grid > *:nth-child(7) { --stagger: 6; }
+.page-reveal .bento-grid > *:nth-child(8) { --stagger: 7; }
+.page-reveal .bento-grid > *:nth-child(9) { --stagger: 8; }
+.page-reveal .bento-grid > *:nth-child(10) { --stagger: 9; }
+.page-reveal .bento-grid > *:nth-child(11) { --stagger: 10; }
+
+.page-reveal .bento-grid > *:nth-child(4n + 1) {
+  animation-name: card-fly-left;
+}
+
+.page-reveal .bento-grid > *:nth-child(4n + 2) {
+  animation-name: card-fly-right;
+}
+
+.page-reveal .bento-grid > *:nth-child(4n + 3) {
+  animation-name: card-fly-up;
+}
+
+.page-reveal .bento-grid > *:nth-child(4n) {
+  animation-name: card-fly-down;
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes card-fly-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes card-fly-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes card-fly-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes card-fly-down {
+  from {
+    opacity: 0;
+    transform: translateY(-22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* BackgroundKlein 组件使用 inline styles 和 styled-jsx，这里不再需要 CSS 类 */
+
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -50,6 +160,16 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   padding: 40px;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+}
+
+.bento-grid.free-layout {
+  display: block;
+  position: relative;
 }
 
 @media (max-width: 1023px) {
@@ -101,5 +221,9 @@ body {
   .card-qa {
     grid-column: 9 / 13;
     grid-row: 6 / 10;
+  }
+  .card-tagline {
+    grid-column: 5 / 9;
+    grid-row: 8 / 10;
   }
 }

@@ -1,0 +1,13 @@
+category_id,name_en,name_zh,order_index
+47b6fa04-1f21-476d-9a2b-28b732aacc73,Top Picks,最新最强,1
+47b6fa04-1f21-476d-9a2b-28b732aacc73,Chinese,中文,2
+472b580b-2e4b-4a29-8cb0-2abf2726fc0a,Coding,写代码,1
+472b580b-2e4b-4a29-8cb0-2abf2726fc0a,UI Design,画前端,2
+472b580b-2e4b-4a29-8cb0-2abf2726fc0a,Templates,找模版,3
+472b580b-2e4b-4a29-8cb0-2abf2726fc0a,Deployment,部署,4
+472b580b-2e4b-4a29-8cb0-2abf2726fc0a,Database,数据库,5
+57e07ebc-e3ee-4358-911a-59eb71de38e4,Fast Gen,高速生图,1
+57e07ebc-e3ee-4358-911a-59eb71de38e4,High Quality,高画质,2
+a13eaf45-3e56-48b3-8f8a-bd4a3edcf9b4,Short Video,短视频,1
+a13eaf45-3e56-48b3-8f8a-bd4a3edcf9b4,Chinese,中文,2
+7fd97498-d087-4063-a6a4-1fba6a0dfb8e,Top Picks,最新最强,1

@@ -1,0 +1,6 @@
+slug,name_en,name_zh,description_en,description_zh,icon,order_index
+ai-chatbot,AI Chatbot,AI 对话,,,,1
+ai-coding,AI Coding,AI 编程,,,,2
+ai-image,AI Image,AI 图像,,,,3
+ai-video,AI Video,AI 视频,,,,4
+ai-audio,AI Audio,AI 音频,,,,5
