@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase";
+import { createPublicSupabaseClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  const supabase = createAdminSupabaseClient();
+  const supabase = createPublicSupabaseClient();
   const url = new URL(request.url);
   const categoryId = url.searchParams.get("category_id");
   const subTag = url.searchParams.get("sub_tag");

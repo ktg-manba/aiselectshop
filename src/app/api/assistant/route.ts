@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase";
+import { createPublicSupabaseClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
   let matches: ToolMatch[] = [];
   try {
-    const supabase = createAdminSupabaseClient();
+    const supabase = createPublicSupabaseClient();
     const { data } = await supabase
       .from("tools")
       .select("id,name_en,name_zh,official_url")

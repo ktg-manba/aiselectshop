@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase";
+import { createPublicSupabaseClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
@@ -7,7 +7,7 @@ export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const supabase = createAdminSupabaseClient();
+  const supabase = createPublicSupabaseClient();
   const { id } = await params;
   const { data, error } = await supabase
     .from("cases")

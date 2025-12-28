@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { createAdminSupabaseClient } from "@/lib/supabase";
+import { createPublicSupabaseClient } from "@/lib/supabase";
 
 export const runtime = "nodejs";
 
 export async function GET() {
-  const supabase = createAdminSupabaseClient();
+  const supabase = createPublicSupabaseClient();
   const { data: categoriesData, error: categoriesError } = await supabase
     .from("categories")
     .select("*")
