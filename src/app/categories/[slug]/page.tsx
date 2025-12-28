@@ -5,8 +5,6 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import BottomBar from "@/components/BottomBar";
 import { useLanguage } from "@/components/LanguageProvider";
-import { categoryGroups as fallbackCategoryGroups } from "@/data/categories";
-import { tools as fallbackTools } from "@/data/tools";
 import type { Tool } from "@/data/tools";
 import { getLogoUrl } from "@/lib/logo";
 
@@ -19,17 +17,22 @@ export default function CategoryDetailPage() {
   const params = useParams<{ slug: string }>();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [categoryGroups, setCategoryGroups] =
-    useState<typeof fallbackCategoryGroups>(fallbackCategoryGroups);
-  const [toolItems, setToolItems] = useState<Tool[]>(fallbackTools);
+  const [categoryGroups, setCategoryGroups] = useState<
+    Array<{
+      id: string;
+      slug?: string | null;
+      name: { en: string; zh: string };
+      subTags: { id: string; name: { en: string; zh: string } }[];
+    }>
+  >([]);
+  const [toolItems, setToolItems] = useState<Tool[]>([]);
   const [sort, setSort] = useState<Sort>("popularity");
   const [activeSubTagId, setActiveSubTagId] = useState<string | null>(null);
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
   const categorySlug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
   const activeCategory =
     categoryGroups.find((item) => item.slug === categorySlug) ??
-    categoryGroups.find((item) => item.id === categorySlug) ??
-    categoryGroups[0];
+    categoryGroups.find((item) => item.id === categorySlug);
   const activeCategoryLabel = activeCategory
     ? lang === "EN"
       ? activeCategory.name.en
@@ -153,6 +156,29 @@ export default function CategoryDetailPage() {
     sort,
     toolItems,
   ]);
+
+  if (!activeCategory) {
+    return (
+      <div className="min-h-screen px-6 pb-16 page-reveal">
+        <div className="fixed bottom-6 left-6 z-40">
+          <button
+            onClick={toggle}
+            className="h-10 w-10 bg-white/90 text-gray-700 rounded-full text-xs font-semibold shadow-sm hover:scale-105 transition flex items-center justify-center"
+          >
+            {lang === "中文" ? "中" : "EN"}
+          </button>
+        </div>
+        <div className="max-w-6xl mx-auto pt-12">
+          <div className="bg-white/90 rounded-2xl p-8 text-center shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
+            <div className="font-display text-2xl font-bold">
+              {t({ en: "Loading...", zh: "加载中..." })}
+            </div>
+          </div>
+        </div>
+        <BottomBar active="categories" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen px-6 pb-16 page-reveal">

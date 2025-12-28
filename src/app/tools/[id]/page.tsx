@@ -5,7 +5,6 @@ import { use, useEffect, useMemo, useState } from "react";
 import BottomBar from "@/components/BottomBar";
 import { useLanguage } from "@/components/LanguageProvider";
 import { categoryGroups } from "@/data/categories";
-import { tools as fallbackTools } from "@/data/tools";
 import { getLogoUrl } from "@/lib/logo";
 
 function toCategorySlug(category: string) {
@@ -19,10 +18,34 @@ export default function ToolDetailPage({
 }) {
   const { lang, t, toggle } = useLanguage();
   const { id } = use(params);
-  const [tool, setTool] = useState(
-    fallbackTools.find((item) => item.id === id) ?? null
-  );
-  const [relatedTools, setRelatedTools] = useState<typeof fallbackTools>([]);
+  const [tool, setTool] = useState<{
+    id: string;
+    name: { en: string; zh: string };
+    description: { en: string; zh: string };
+    category: { en: string; zh: string };
+    categoryId: string;
+    pricing: "free" | "paid" | "freemium";
+    tags: { en: string; zh: string }[];
+    secondaryTags: { id: string; name: { en: string; zh: string } }[];
+    url: string;
+    logoUrl?: string;
+    initials: string;
+  } | null>(null);
+  const [relatedTools, setRelatedTools] = useState<
+    Array<{
+      id: string;
+      name: { en: string; zh: string };
+      description: { en: string; zh: string };
+      category: { en: string; zh: string };
+      categoryId: string;
+      pricing: "free" | "paid" | "freemium";
+      tags: { en: string; zh: string }[];
+      secondaryTags: { id: string; name: { en: string; zh: string } }[];
+      url: string;
+      logoUrl?: string;
+      initials: string;
+    }>
+  >([]);
   const [activeSubTagId, setActiveSubTagId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

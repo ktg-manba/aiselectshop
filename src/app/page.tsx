@@ -3,9 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageProvider";
-import { categoryGroups as fallbackCategoryGroups } from "@/data/categories";
 import type { CategoryGroup } from "@/data/categories";
-import { tools as fallbackTools } from "@/data/tools";
 import type { Tool } from "@/data/tools";
 import { getLogoUrl } from "@/lib/logo";
 
@@ -58,8 +56,8 @@ function getCaseLink(item: CaseItem | null) {
 
 export default function Home() {
   const { lang, toggle, t } = useLanguage();
-  const [toolItems, setToolItems] = useState<Tool[]>(fallbackTools);
-  const [categoryGroups, setCategoryGroups] = useState<CategoryGroup[]>(fallbackCategoryGroups);
+  const [toolItems, setToolItems] = useState<Tool[]>([]);
+  const [categoryGroups, setCategoryGroups] = useState<CategoryGroup[]>([]);
   const [toolModal, setToolModal] = useState<Tool | null>(null);
   const [categoryModal, setCategoryModal] = useState<string | null>(null);
   const [subTagModal, setSubTagModal] = useState<string | null>(null);
